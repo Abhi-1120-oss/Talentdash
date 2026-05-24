@@ -9,38 +9,167 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SubmitRouteImport } from './routes/submit'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as DocsRouteImport } from './routes/docs'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RolesRoleRouteImport } from './routes/roles.$role'
+import { Route as CompaniesSlugRouteImport } from './routes/companies.$slug'
+import { Route as AdminReviewRouteImport } from './routes/admin.review'
+import { Route as AdminQualityRouteImport } from './routes/admin.quality'
+import { Route as ApiPublicIngestSalaryRouteImport } from './routes/api/public/ingest-salary'
 
+const SubmitRoute = SubmitRouteImport.update({
+  id: '/submit',
+  path: '/submit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocsRoute = DocsRouteImport.update({
+  id: '/docs',
+  path: '/docs',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RolesRoleRoute = RolesRoleRouteImport.update({
+  id: '/roles/$role',
+  path: '/roles/$role',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CompaniesSlugRoute = CompaniesSlugRouteImport.update({
+  id: '/companies/$slug',
+  path: '/companies/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminReviewRoute = AdminReviewRouteImport.update({
+  id: '/admin/review',
+  path: '/admin/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminQualityRoute = AdminQualityRouteImport.update({
+  id: '/admin/quality',
+  path: '/admin/quality',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicIngestSalaryRoute = ApiPublicIngestSalaryRouteImport.update({
+  id: '/api/public/ingest-salary',
+  path: '/api/public/ingest-salary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/login': typeof LoginRoute
+  '/submit': typeof SubmitRoute
+  '/admin/quality': typeof AdminQualityRoute
+  '/admin/review': typeof AdminReviewRoute
+  '/companies/$slug': typeof CompaniesSlugRoute
+  '/roles/$role': typeof RolesRoleRoute
+  '/api/public/ingest-salary': typeof ApiPublicIngestSalaryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/login': typeof LoginRoute
+  '/submit': typeof SubmitRoute
+  '/admin/quality': typeof AdminQualityRoute
+  '/admin/review': typeof AdminReviewRoute
+  '/companies/$slug': typeof CompaniesSlugRoute
+  '/roles/$role': typeof RolesRoleRoute
+  '/api/public/ingest-salary': typeof ApiPublicIngestSalaryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/docs': typeof DocsRoute
+  '/login': typeof LoginRoute
+  '/submit': typeof SubmitRoute
+  '/admin/quality': typeof AdminQualityRoute
+  '/admin/review': typeof AdminReviewRoute
+  '/companies/$slug': typeof CompaniesSlugRoute
+  '/roles/$role': typeof RolesRoleRoute
+  '/api/public/ingest-salary': typeof ApiPublicIngestSalaryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/docs'
+    | '/login'
+    | '/submit'
+    | '/admin/quality'
+    | '/admin/review'
+    | '/companies/$slug'
+    | '/roles/$role'
+    | '/api/public/ingest-salary'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/docs'
+    | '/login'
+    | '/submit'
+    | '/admin/quality'
+    | '/admin/review'
+    | '/companies/$slug'
+    | '/roles/$role'
+    | '/api/public/ingest-salary'
+  id:
+    | '__root__'
+    | '/'
+    | '/docs'
+    | '/login'
+    | '/submit'
+    | '/admin/quality'
+    | '/admin/review'
+    | '/companies/$slug'
+    | '/roles/$role'
+    | '/api/public/ingest-salary'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DocsRoute: typeof DocsRoute
+  LoginRoute: typeof LoginRoute
+  SubmitRoute: typeof SubmitRoute
+  AdminQualityRoute: typeof AdminQualityRoute
+  AdminReviewRoute: typeof AdminReviewRoute
+  CompaniesSlugRoute: typeof CompaniesSlugRoute
+  RolesRoleRoute: typeof RolesRoleRoute
+  ApiPublicIngestSalaryRoute: typeof ApiPublicIngestSalaryRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/submit': {
+      id: '/submit'
+      path: '/submit'
+      fullPath: '/submit'
+      preLoaderRoute: typeof SubmitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/docs': {
+      id: '/docs'
+      path: '/docs'
+      fullPath: '/docs'
+      preLoaderRoute: typeof DocsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,22 +177,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roles/$role': {
+      id: '/roles/$role'
+      path: '/roles/$role'
+      fullPath: '/roles/$role'
+      preLoaderRoute: typeof RolesRoleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/companies/$slug': {
+      id: '/companies/$slug'
+      path: '/companies/$slug'
+      fullPath: '/companies/$slug'
+      preLoaderRoute: typeof CompaniesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/review': {
+      id: '/admin/review'
+      path: '/admin/review'
+      fullPath: '/admin/review'
+      preLoaderRoute: typeof AdminReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/quality': {
+      id: '/admin/quality'
+      path: '/admin/quality'
+      fullPath: '/admin/quality'
+      preLoaderRoute: typeof AdminQualityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/ingest-salary': {
+      id: '/api/public/ingest-salary'
+      path: '/api/public/ingest-salary'
+      fullPath: '/api/public/ingest-salary'
+      preLoaderRoute: typeof ApiPublicIngestSalaryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DocsRoute: DocsRoute,
+  LoginRoute: LoginRoute,
+  SubmitRoute: SubmitRoute,
+  AdminQualityRoute: AdminQualityRoute,
+  AdminReviewRoute: AdminReviewRoute,
+  CompaniesSlugRoute: CompaniesSlugRoute,
+  RolesRoleRoute: RolesRoleRoute,
+  ApiPublicIngestSalaryRoute: ApiPublicIngestSalaryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

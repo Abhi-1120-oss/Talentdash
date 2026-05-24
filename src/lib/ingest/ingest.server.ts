@@ -184,7 +184,7 @@ export async function ingestBatch(payload: unknown): Promise<IngestResponse> {
       rejected: rejected.length,
       duplicates,
       low_confidence: lowConfidence,
-      error_summary: rejected.length ? { rejections: rejected.slice(0, 50) } : null,
+      error_summary: rejected.length ? ({ rejections: rejected.slice(0, 50) } as never) : null,
     })
     .eq("id", run.id);
 

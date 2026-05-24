@@ -14,16 +14,205 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      api_keys: {
+        Row: {
+          created_at: string
+          id: string
+          key_hash: string
+          label: string
+          last_used_at: string | null
+          revoked_at: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          key_hash: string
+          label: string
+          last_used_at?: string | null
+          revoked_at?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          key_hash?: string
+          label?: string
+          last_used_at?: string | null
+          revoked_at?: string | null
+        }
+        Relationships: []
+      }
+      companies: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          normalized_name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          normalized_name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          normalized_name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
+      ingestion_runs: {
+        Row: {
+          accepted: number
+          duplicates: number
+          error_summary: Json | null
+          finished_at: string | null
+          id: string
+          low_confidence: number
+          rejected: number
+          scraped: number
+          source: string
+          started_at: string
+        }
+        Insert: {
+          accepted?: number
+          duplicates?: number
+          error_summary?: Json | null
+          finished_at?: string | null
+          id?: string
+          low_confidence?: number
+          rejected?: number
+          scraped?: number
+          source: string
+          started_at?: string
+        }
+        Update: {
+          accepted?: number
+          duplicates?: number
+          error_summary?: Json | null
+          finished_at?: string | null
+          id?: string
+          low_confidence?: number
+          rejected?: number
+          scraped?: number
+          source?: string
+          started_at?: string
+        }
+        Relationships: []
+      }
+      salary_records: {
+        Row: {
+          base_salary: number
+          bonus: number
+          company_id: string
+          confidence_score: number
+          dedup_hash: string
+          experience_years: number
+          id: string
+          level_standardized: string
+          location: string | null
+          raw_payload: Json | null
+          role: string
+          scraped_at: string | null
+          source_platform: Database["public"]["Enums"]["source_platform"]
+          source_url: string | null
+          status: Database["public"]["Enums"]["record_status"]
+          stock: number
+          submitted_at: string
+          total_compensation: number
+        }
+        Insert: {
+          base_salary: number
+          bonus?: number
+          company_id: string
+          confidence_score: number
+          dedup_hash: string
+          experience_years: number
+          id?: string
+          level_standardized: string
+          location?: string | null
+          raw_payload?: Json | null
+          role: string
+          scraped_at?: string | null
+          source_platform?: Database["public"]["Enums"]["source_platform"]
+          source_url?: string | null
+          status?: Database["public"]["Enums"]["record_status"]
+          stock?: number
+          submitted_at?: string
+          total_compensation: number
+        }
+        Update: {
+          base_salary?: number
+          bonus?: number
+          company_id?: string
+          confidence_score?: number
+          dedup_hash?: string
+          experience_years?: number
+          id?: string
+          level_standardized?: string
+          location?: string | null
+          raw_payload?: Json | null
+          role?: string
+          scraped_at?: string | null
+          source_platform?: Database["public"]["Enums"]["source_platform"]
+          source_url?: string | null
+          status?: Database["public"]["Enums"]["record_status"]
+          stock?: number
+          submitted_at?: string
+          total_compensation?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "salary_records_company_id_fkey"
+            columns: ["company_id"]
+            isOneToOne: false
+            referencedRelation: "companies"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      record_status: "approved" | "pending_review" | "rejected"
+      source_platform: "ambitionbox" | "glassdoor" | "manual" | "other"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +339,10 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      record_status: ["approved", "pending_review", "rejected"],
+      source_platform: ["ambitionbox", "glassdoor", "manual", "other"],
+    },
   },
 } as const

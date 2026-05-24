@@ -41,11 +41,7 @@ const sample = `{
   "low_confidence": 0
 }`;
 
-export default function DocsPage() {
-  return <DocsPage_ />;
-}
-function DocsPage_() {
-  return (
+function DocsPage() {
     <main className="container mx-auto px-4 py-10 max-w-3xl space-y-6">
       <div>
         <h1 className="text-3xl font-semibold">Ingest API</h1>

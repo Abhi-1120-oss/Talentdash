@@ -51,6 +51,13 @@ export function SiteHeader() {
           {email ? (
             <>
               <Link
+                to="/me"
+                className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent"
+                activeProps={{ className: "px-3 py-1.5 rounded-md text-foreground bg-accent" }}
+              >
+                My career
+              </Link>
+              <Link
                 to="/admin/quality"
                 className="px-3 py-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-accent"
               >
@@ -69,7 +76,7 @@ export function SiteHeader() {
           ) : (
             <Link to="/login">
               <Button variant="outline" size="sm">
-                Admin sign in
+                Sign in
               </Button>
             </Link>
           )}

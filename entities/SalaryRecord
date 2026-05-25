@@ -1,0 +1,124 @@
+{
+  "name": "SalaryRecord",
+  "type": "object",
+  "properties": {
+    "company": {
+      "type": "string",
+      "description": "Canonical company name"
+    },
+    "role": {
+      "type": "string",
+      "description": "Job role/title"
+    },
+    "level_standardized": {
+      "type": "string",
+      "description": "Standardized level code e.g. SDE-I, L5, Staff"
+    },
+    "location": {
+      "type": "string",
+      "description": "City/location"
+    },
+    "experience_years_min": {
+      "type": "number",
+      "description": "Minimum years of experience"
+    },
+    "experience_years_max": {
+      "type": "number",
+      "description": "Maximum years of experience"
+    },
+    "base_salary": {
+      "type": "number",
+      "description": "Annual base salary in INR LPA"
+    },
+    "bonus": {
+      "type": "number",
+      "description": "Annual bonus in INR LPA"
+    },
+    "stock": {
+      "type": "number",
+      "description": "Annual stock/ESOP value in INR LPA"
+    },
+    "total_compensation": {
+      "type": "number",
+      "description": "Total annual compensation in INR LPA (computed)"
+    },
+    "confidence_score": {
+      "type": "number",
+      "description": "Data confidence score 0.0 to 1.0"
+    },
+    "source_platform": {
+      "type": "string",
+      "enum": [
+        "AmbitionBox",
+        "Glassdoor",
+        "Manual",
+        "LinkedIn",
+        "Other"
+      ],
+      "description": "Source of the salary data"
+    },
+    "scraped_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When data was scraped"
+    },
+    "is_verified": {
+      "type": "boolean",
+      "default": false,
+      "description": "Human-reviewed and verified"
+    },
+    "is_rejected": {
+      "type": "boolean",
+      "default": false,
+      "description": "Rejected from public pool"
+    },
+    "review_status": {
+      "type": "string",
+      "enum": [
+        "pending",
+        "approved",
+        "rejected"
+      ],
+      "default": "pending",
+      "description": "Review workflow status"
+    },
+    "raw_scraped_json": {
+      "type": "string",
+      "description": "Original raw scraped payload as JSON string"
+    },
+    "normalized_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When record was normalized by LLM"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Company logo URL"
+    },
+    "industry": {
+      "type": "string",
+      "description": "Company industry"
+    },
+    "role_family": {
+      "type": "string",
+      "enum": [
+        "Engineering",
+        "Data",
+        "Product",
+        "Design",
+        "Other"
+      ],
+      "description": "Role family classification"
+    },
+    "seniority_rank": {
+      "type": "number",
+      "description": "Numeric rank for sorting by seniority"
+    }
+  },
+  "required": [
+    "company",
+    "role",
+    "base_salary",
+    "source_platform"
+  ]
+}

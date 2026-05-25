@@ -1,0 +1,51 @@
+{
+  "name": "Company",
+  "type": "object",
+  "properties": {
+    "canonical_name": {
+      "type": "string",
+      "description": "Official canonical company name"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative names/spellings"
+    },
+    "logo_url": {
+      "type": "string",
+      "description": "Company logo image URL"
+    },
+    "industry": {
+      "type": "string",
+      "enum": [
+        "Technology",
+        "Fintech",
+        "E-commerce",
+        "SaaS",
+        "Consulting",
+        "Banking",
+        "Healthcare",
+        "Telecom",
+        "Other"
+      ],
+      "description": "Industry vertical"
+    },
+    "website": {
+      "type": "string",
+      "description": "Company website URL"
+    },
+    "hq_location": {
+      "type": "string",
+      "description": "Headquarters city"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "canonical_name"
+  ]
+}

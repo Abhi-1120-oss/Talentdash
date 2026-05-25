@@ -1,0 +1,49 @@
+{
+  "name": "Level",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "description": "Standardized level code e.g. SDE-I, L5, Staff"
+    },
+    "display_name": {
+      "type": "string",
+      "description": "Human-readable level name"
+    },
+    "seniority_rank": {
+      "type": "number",
+      "description": "Integer rank for sorting (1 = most junior)"
+    },
+    "role_family": {
+      "type": "string",
+      "enum": [
+        "Engineering",
+        "Data",
+        "Product",
+        "Design",
+        "All"
+      ],
+      "description": "Which role family this level applies to"
+    },
+    "experience_min": {
+      "type": "number",
+      "description": "Typical minimum years of experience"
+    },
+    "experience_max": {
+      "type": "number",
+      "description": "Typical maximum years of experience"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Other level names that map here"
+    }
+  },
+  "required": [
+    "code",
+    "display_name",
+    "seniority_rank"
+  ]
+}

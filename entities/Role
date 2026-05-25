@@ -1,0 +1,40 @@
+{
+  "name": "Role",
+  "type": "object",
+  "properties": {
+    "canonical_title": {
+      "type": "string",
+      "description": "Standardized role title"
+    },
+    "role_family": {
+      "type": "string",
+      "enum": [
+        "Engineering",
+        "Data",
+        "Product",
+        "Design",
+        "Other"
+      ],
+      "description": "Role family classification"
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Alternative job titles that map to this role"
+    },
+    "level_mappings": {
+      "type": "string",
+      "description": "JSON mapping of level codes to experience ranges"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "required": [
+    "canonical_title",
+    "role_family"
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "name": "PipelineRun",
+  "type": "object",
+  "properties": {
+    "run_id": {
+      "type": "string",
+      "description": "Unique run identifier (UUID)"
+    },
+    "source": {
+      "type": "string",
+      "enum": [
+        "AmbitionBox",
+        "Glassdoor",
+        "LinkedIn",
+        "Manual",
+        "Mixed"
+      ],
+      "description": "Data source for this run"
+    },
+    "started_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "completed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "records_scraped": {
+      "type": "number",
+      "default": 0
+    },
+    "records_normalized": {
+      "type": "number",
+      "default": 0
+    },
+    "validation_failures": {
+      "type": "number",
+      "default": 0
+    },
+    "duplicates_skipped": {
+      "type": "number",
+      "default": 0
+    },
+    "llm_failures": {
+      "type": "number",
+      "default": 0
+    },
+    "avg_confidence_score": {
+      "type": "number"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "running",
+        "completed",
+        "failed",
+        "partial"
+      ],
+      "default": "running"
+    },
+    "error_message": {
+      "type": "string",
+      "description": "Error details if run failed"
+    },
+    "records_inserted": {
+      "type": "number",
+      "default": 0
+    },
+    "field_null_percentages": {
+      "type": "string",
+      "description": "JSON: null % per field"
+    },
+    "confidence_distribution": {
+      "type": "string",
+      "description": "JSON: score bucket counts"
+    },
+    "rejection_reasons": {
+      "type": "string",
+      "description": "JSON: reason \u2192 count map"
+    }
+  },
+  "required": [
+    "run_id",
+    "source"
+  ]
+}

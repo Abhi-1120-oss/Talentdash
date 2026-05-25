@@ -1,0 +1,74 @@
+{
+  "name": "CareerEntry",
+  "type": "object",
+  "properties": {
+    "company": {
+      "type": "string",
+      "description": "Company name"
+    },
+    "role": {
+      "type": "string",
+      "description": "Job title / role"
+    },
+    "level": {
+      "type": "string",
+      "description": "Level/seniority at this role"
+    },
+    "location": {
+      "type": "string",
+      "description": "City / location"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When this role started"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date",
+      "description": "When this role ended (leave blank if current)"
+    },
+    "is_current": {
+      "type": "boolean",
+      "default": false,
+      "description": "Is this the current role?"
+    },
+    "base_salary": {
+      "type": "number",
+      "description": "Annual base salary in INR LPA"
+    },
+    "bonus": {
+      "type": "number",
+      "description": "Annual bonus in INR LPA"
+    },
+    "stock": {
+      "type": "number",
+      "description": "Annual stock/ESOP value in INR LPA"
+    },
+    "total_compensation": {
+      "type": "number",
+      "description": "Total annual compensation in INR LPA"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional personal notes about this role"
+    },
+    "role_family": {
+      "type": "string",
+      "enum": [
+        "Engineering",
+        "Data",
+        "Product",
+        "Design",
+        "Other"
+      ],
+      "description": "Role family for benchmark matching"
+    }
+  },
+  "required": [
+    "company",
+    "role",
+    "start_date",
+    "base_salary"
+  ]
+}

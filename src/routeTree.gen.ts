@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SubmitRouteImport } from './routes/submit'
+import { Route as MeRouteImport } from './routes/me'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as DocsRouteImport } from './routes/docs'
 import { Route as IndexRouteImport } from './routes/index'
@@ -22,6 +23,11 @@ import { Route as ApiPublicIngestSalaryRouteImport } from './routes/api/public/i
 const SubmitRoute = SubmitRouteImport.update({
   id: '/submit',
   path: '/submit',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeRoute = MeRouteImport.update({
+  id: '/me',
+  path: '/me',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/login': typeof LoginRoute
+  '/me': typeof MeRoute
   '/submit': typeof SubmitRoute
   '/admin/quality': typeof AdminQualityRoute
   '/admin/review': typeof AdminReviewRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/login': typeof LoginRoute
+  '/me': typeof MeRoute
   '/submit': typeof SubmitRoute
   '/admin/quality': typeof AdminQualityRoute
   '/admin/review': typeof AdminReviewRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/docs': typeof DocsRoute
   '/login': typeof LoginRoute
+  '/me': typeof MeRoute
   '/submit': typeof SubmitRoute
   '/admin/quality': typeof AdminQualityRoute
   '/admin/review': typeof AdminReviewRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/login'
+    | '/me'
     | '/submit'
     | '/admin/quality'
     | '/admin/review'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/login'
+    | '/me'
     | '/submit'
     | '/admin/quality'
     | '/admin/review'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/docs'
     | '/login'
+    | '/me'
     | '/submit'
     | '/admin/quality'
     | '/admin/review'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DocsRoute: typeof DocsRoute
   LoginRoute: typeof LoginRoute
+  MeRoute: typeof MeRoute
   SubmitRoute: typeof SubmitRoute
   AdminQualityRoute: typeof AdminQualityRoute
   AdminReviewRoute: typeof AdminReviewRoute
@@ -154,6 +167,13 @@ declare module '@tanstack/react-router' {
       path: '/submit'
       fullPath: '/submit'
       preLoaderRoute: typeof SubmitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/me': {
+      id: '/me'
+      path: '/me'
+      fullPath: '/me'
+      preLoaderRoute: typeof MeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DocsRoute: DocsRoute,
   LoginRoute: LoginRoute,
+  MeRoute: MeRoute,
   SubmitRoute: SubmitRoute,
   AdminQualityRoute: AdminQualityRoute,
   AdminReviewRoute: AdminReviewRoute,
@@ -229,3 +250,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

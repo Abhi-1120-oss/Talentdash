@@ -285,7 +285,7 @@ function MePage() {
                     border: "1px solid hsl(var(--border))",
                     fontSize: 12,
                   }}
-                  formatter={(value: number | null) =>
+                  formatter={(value) =>
                     value == null ? "—" : formatINR(Number(value))
                   }
                 />

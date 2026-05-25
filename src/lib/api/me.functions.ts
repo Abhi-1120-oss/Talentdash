@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { parseSalaryToINR } from "@/lib/ingest/salary-parser";
+import { parseSalaryToAvg } from "@/lib/ingest/salary-parser";
 
 const entryInput = z.object({
   company_name: z.string().trim().min(1).max(200),
@@ -21,8 +21,7 @@ const entryInput = z.object({
 function toINR(v: string | number | null | undefined): number {
   if (v == null || v === "") return 0;
   if (typeof v === "number") return Math.round(v);
-  const parsed = parseSalaryToINR(v);
-  return parsed ?? 0;
+  return parseSalaryToAvg(v) ?? 0;
 }
 
 export const listMyEntries = createServerFn({ method: "GET" })

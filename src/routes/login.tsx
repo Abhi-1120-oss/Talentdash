@@ -27,7 +27,7 @@ function LoginPage() {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) throw error;
         toast.success("Signed in");
-        nav({ to: "/admin/quality" });
+        nav({ to: "/me" });
       } else {
         const { error } = await supabase.auth.signUp({
           email,
@@ -47,7 +47,7 @@ function LoginPage() {
   return (
     <main className="container mx-auto px-4 py-16 max-w-md">
       <Card>
-        <CardHeader><CardTitle>{mode === "signin" ? "Admin sign in" : "Create account"}</CardTitle></CardHeader>
+        <CardHeader><CardTitle>{mode === "signin" ? "Sign in" : "Create your account"}</CardTitle></CardHeader>
         <CardContent>
           <form onSubmit={submit} className="grid gap-3">
             <div className="grid gap-1.5">
@@ -70,7 +70,7 @@ function LoginPage() {
             </button>
           </form>
           <p className="text-xs text-muted-foreground mt-4">
-            Note: an admin must grant your user the <code>admin</code> role for review pages to load.
+            Track your own salary history privately and benchmark against the market.
           </p>
         </CardContent>
       </Card>

@@ -175,6 +175,63 @@ export type Database = {
           },
         ]
       }
+      user_career_entries: {
+        Row: {
+          base_salary: number
+          bonus: number
+          company_name: string
+          created_at: string
+          end_date: string | null
+          experience_years: number
+          id: string
+          level: string | null
+          location: string | null
+          notes: string | null
+          role: string
+          start_date: string
+          stock: number
+          total_compensation: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          base_salary: number
+          bonus?: number
+          company_name: string
+          created_at?: string
+          end_date?: string | null
+          experience_years?: number
+          id?: string
+          level?: string | null
+          location?: string | null
+          notes?: string | null
+          role: string
+          start_date: string
+          stock?: number
+          total_compensation?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          base_salary?: number
+          bonus?: number
+          company_name?: string
+          created_at?: string
+          end_date?: string | null
+          experience_years?: number
+          id?: string
+          level?: string | null
+          location?: string | null
+          notes?: string | null
+          role?: string
+          start_date?: string
+          stock?: number
+          total_compensation?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string

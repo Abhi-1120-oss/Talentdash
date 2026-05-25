@@ -75,7 +75,11 @@ export const getQualityMetrics = createServerFn({ method: "GET" })
 
     return {
       runs: runs ?? [],
-      totals: { approved: totalApproved ?? 0, pending: totalPending ?? 0, rejected: totalRejected ?? 0 },
+      totals: {
+        approved: totalApproved ?? 0,
+        pending: totalPending ?? 0,
+        rejected: totalRejected ?? 0,
+      },
       confidenceBuckets: buckets,
     };
   });
@@ -94,7 +98,9 @@ export const getReviewQueue = createServerFn({ method: "GET" })
 
     const { data } = await supabaseAdmin
       .from("salary_records")
-      .select("id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, status, raw_payload, companies(name, slug)")
+      .select(
+        "id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, status, raw_payload, companies(name, slug)",
+      )
       .in("status", ["pending_review", "rejected"])
       .order("confidence_score", { ascending: true })
       .limit(100);

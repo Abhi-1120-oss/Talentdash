@@ -20,9 +20,9 @@ const RULES: Rule[] = [
   { pattern: /\bdirector\b/i, level: "Director", confidence: 0.9 },
   { pattern: /\bsenior\s+manager\b/i, level: "Senior Manager", confidence: 0.9 },
   { pattern: /\bmanager\b/i, level: "Manager", confidence: 0.85 },
-  { pattern: /\bsde[\s\-]?(iii|3)\b/i, level: "SDE-III", confidence: 0.95 },
-  { pattern: /\bsde[\s\-]?(ii|2)\b/i, level: "SDE-II", confidence: 0.95 },
-  { pattern: /\bsde[\s\-]?(i|1)\b/i, level: "SDE-I", confidence: 0.95 },
+  { pattern: /\bsde[\s-]?(iii|3)\b/i, level: "SDE-III", confidence: 0.95 },
+  { pattern: /\bsde[\s-]?(ii|2)\b/i, level: "SDE-II", confidence: 0.95 },
+  { pattern: /\bsde[\s-]?(i|1)\b/i, level: "SDE-I", confidence: 0.95 },
   { pattern: /\b(l|level)\s*([1-8])\b/i, level: "L1", confidence: 0.9 }, // captured below
   { pattern: /\bsenior\b/i, level: "Senior", confidence: 0.8 },
 ];
@@ -41,10 +41,7 @@ function experienceToLevel(years: number): StandardLevel {
  * Standardize a free-text title into a canonical level.
  * `years` is used as a fallback signal when the title is ambiguous.
  */
-export function standardizeLevel(
-  rawTitle: string | null | undefined,
-  years: number,
-): LevelResult {
+export function standardizeLevel(rawTitle: string | null | undefined, years: number): LevelResult {
   const title = (rawTitle ?? "").trim();
   if (!title) {
     return { level: experienceToLevel(years), confidence: 0.4 };

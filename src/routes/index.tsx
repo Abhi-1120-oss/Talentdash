@@ -5,7 +5,14 @@ import { listCompanies, searchSalaries } from "@/lib/api/salaries.functions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { formatINR } from "@/lib/format";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis, CartesianGrid } from "recharts";
 import { Building2, Search, Sparkles } from "lucide-react";
@@ -69,8 +76,8 @@ function Home() {
           India compensation, made comparable.
         </h1>
         <p className="mt-3 max-w-2xl text-muted-foreground">
-          Salary data across Indian tech companies, normalized to standard levels with
-          confidence scoring so you can actually compare offers.
+          Salary data across Indian tech companies, normalized to standard levels with confidence
+          scoring so you can actually compare offers.
         </p>
         <div className="mt-6 max-w-xl relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -135,7 +142,10 @@ function Home() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Recent submissions {q && <span className="text-muted-foreground font-normal">· filtered by "{q}"</span>}</CardTitle>
+          <CardTitle>
+            Recent submissions{" "}
+            {q && <span className="text-muted-foreground font-normal">· filtered by "{q}"</span>}
+          </CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <Table>
@@ -155,7 +165,11 @@ function Home() {
                 <TableRow key={s.id}>
                   <TableCell>
                     {s.companies ? (
-                      <Link to="/companies/$slug" params={{ slug: s.companies.slug }} className="font-medium hover:underline">
+                      <Link
+                        to="/companies/$slug"
+                        params={{ slug: s.companies.slug }}
+                        className="font-medium hover:underline"
+                      >
                         {s.companies.name}
                       </Link>
                     ) : (
@@ -171,8 +185,12 @@ function Home() {
                     <Badge variant="outline">{s.level_standardized}</Badge>
                   </TableCell>
                   <TableCell>{Number(s.experience_years)}y</TableCell>
-                  <TableCell className="text-right tabular-nums">{formatINR(Number(s.base_salary))}</TableCell>
-                  <TableCell className="text-right font-medium tabular-nums">{formatINR(Number(s.total_compensation))}</TableCell>
+                  <TableCell className="text-right tabular-nums">
+                    {formatINR(Number(s.base_salary))}
+                  </TableCell>
+                  <TableCell className="text-right font-medium tabular-nums">
+                    {formatINR(Number(s.total_compensation))}
+                  </TableCell>
                   <TableCell>
                     <ConfidencePill value={Number(s.confidence_score)} />
                   </TableCell>
@@ -195,6 +213,10 @@ function Home() {
 
 function ConfidencePill({ value }: { value: number }) {
   const tone =
-    value >= 0.85 ? "bg-success/15 text-success" : value >= 0.6 ? "bg-warning/15 text-warning" : "bg-destructive/15 text-destructive";
+    value >= 0.85
+      ? "bg-success/15 text-success"
+      : value >= 0.6
+        ? "bg-warning/15 text-warning"
+        : "bg-destructive/15 text-destructive";
   return <span className={`text-xs px-2 py-0.5 rounded-full ${tone}`}>{value.toFixed(2)}</span>;
 }

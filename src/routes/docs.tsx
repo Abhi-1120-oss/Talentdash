@@ -5,7 +5,10 @@ export const Route = createFileRoute("/docs")({
   head: () => ({
     meta: [
       { title: "Ingest API — TalentDash" },
-      { name: "description", content: "POST salary records into TalentDash from your Python pipeline." },
+      {
+        name: "description",
+        content: "POST salary records into TalentDash from your Python pipeline.",
+      },
     ],
   }),
   component: DocsPage,
@@ -52,7 +55,9 @@ function DocsPage() {
       </div>
 
       <Card>
-        <CardHeader><CardTitle>Endpoint</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Endpoint</CardTitle>
+        </CardHeader>
         <CardContent className="space-y-3 text-sm">
           <div>
             <code className="bg-muted px-2 py-1 rounded">POST /api/public/ingest-salary</code>
@@ -68,29 +73,49 @@ function DocsPage() {
       </Card>
 
       <Card>
-        <CardHeader><CardTitle>Request</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Request</CardTitle>
+        </CardHeader>
         <CardContent>
           <pre className="bg-muted rounded-md p-4 overflow-auto text-xs">{example}</pre>
         </CardContent>
       </Card>
 
       <Card>
-        <CardHeader><CardTitle>Response</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Response</CardTitle>
+        </CardHeader>
         <CardContent>
           <pre className="bg-muted rounded-md p-4 overflow-auto text-xs">{sample}</pre>
           <p className="text-sm text-muted-foreground mt-3">
-            Per-record validation failures appear in <code>rejected[]</code> — the batch does not abort on a single bad record.
-            Records with <code>confidence_score &lt; 0.6</code> are stored with status <code>pending_review</code> and surfaced in the admin review queue.
+            Per-record validation failures appear in <code>rejected[]</code> — the batch does not
+            abort on a single bad record. Records with <code>confidence_score &lt; 0.6</code> are
+            stored with status <code>pending_review</code> and surfaced in the admin review queue.
           </p>
         </CardContent>
       </Card>
 
       <Card>
-        <CardHeader><CardTitle>Server-side processing</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Server-side processing</CardTitle>
+        </CardHeader>
         <CardContent className="text-sm text-muted-foreground space-y-2">
-          <p>Each record runs through: <strong>validate → parse salary → normalize company → standardize level → dedup hash → confidence score → insert</strong>.</p>
-          <p>Duplicate detection collapses identical (company, role, level, location, experience bucket, salary bucket) submissions within a 30-day window.</p>
-          <p>Confidence is weighted across field completeness (25%), salary parse reliability (35%), level inference reliability (25%), and source trust (15%).</p>
+          <p>
+            Each record runs through:{" "}
+            <strong>
+              validate → parse salary → normalize company → standardize level → dedup hash →
+              confidence score → insert
+            </strong>
+            .
+          </p>
+          <p>
+            Duplicate detection collapses identical (company, role, level, location, experience
+            bucket, salary bucket) submissions within a 30-day window.
+          </p>
+          <p>
+            Confidence is weighted across field completeness (25%), salary parse reliability (35%),
+            level inference reliability (25%), and source trust (15%).
+          </p>
         </CardContent>
       </Card>
     </main>

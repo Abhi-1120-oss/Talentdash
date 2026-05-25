@@ -52,7 +52,9 @@ async function upsertCompany(rawName: string): Promise<string> {
 export async function ingestBatch(payload: unknown): Promise<IngestResponse> {
   const parsed = ingestRequestSchema.safeParse(payload);
   if (!parsed.success) {
-    throw new Error(`Invalid request body: ${parsed.error.issues.map((i) => i.message).join("; ")}`);
+    throw new Error(
+      `Invalid request body: ${parsed.error.issues.map((i) => i.message).join("; ")}`,
+    );
   }
   const req: IngestRequest = parsed.data;
 
@@ -96,7 +98,8 @@ export async function ingestBatch(payload: unknown): Promise<IngestResponse> {
 
       // Field completeness: count of meaningful optional fields filled
       const optionals = [r.location, r.bonus, r.stock, r.level, r.source_url];
-      const completeness = optionals.filter((v) => v != null && `${v}`.length > 0).length / optionals.length;
+      const completeness =
+        optionals.filter((v) => v != null && `${v}`.length > 0).length / optionals.length;
 
       const confidence = computeConfidence({
         fieldCompleteness: completeness,

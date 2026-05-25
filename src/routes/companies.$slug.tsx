@@ -2,7 +2,14 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { getCompanyBySlug } from "@/lib/api/salaries.functions";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { formatINR, median } from "@/lib/format";
 
@@ -85,16 +92,30 @@ function CompanyPage() {
             <TableBody>
               {levelRows.map((r) => (
                 <TableRow key={r.level}>
-                  <TableCell><Badge variant="outline">{r.level}</Badge></TableCell>
+                  <TableCell>
+                    <Badge variant="outline">{r.level}</Badge>
+                  </TableCell>
                   <TableCell className="text-right tabular-nums">{r.n}</TableCell>
-                  <TableCell className="text-right tabular-nums">{formatINR(r.medianBase)}</TableCell>
-                  <TableCell className="text-right tabular-nums font-medium">{formatINR(r.medianTotal)}</TableCell>
-                  <TableCell className="text-right tabular-nums text-muted-foreground">{formatINR(r.minTotal)}</TableCell>
-                  <TableCell className="text-right tabular-nums text-muted-foreground">{formatINR(r.maxTotal)}</TableCell>
+                  <TableCell className="text-right tabular-nums">
+                    {formatINR(r.medianBase)}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums font-medium">
+                    {formatINR(r.medianTotal)}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums text-muted-foreground">
+                    {formatINR(r.minTotal)}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums text-muted-foreground">
+                    {formatINR(r.maxTotal)}
+                  </TableCell>
                 </TableRow>
               ))}
               {!levelRows.length && (
-                <TableRow><TableCell colSpan={6} className="text-center py-8 text-muted-foreground">No records.</TableCell></TableRow>
+                <TableRow>
+                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                    No records.
+                  </TableCell>
+                </TableRow>
               )}
             </TableBody>
           </Table>
@@ -102,7 +123,9 @@ function CompanyPage() {
       </Card>
 
       <Card>
-        <CardHeader><CardTitle>All records</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>All records</CardTitle>
+        </CardHeader>
         <CardContent className="p-0">
           <Table>
             <TableHeader>
@@ -121,13 +144,23 @@ function CompanyPage() {
               {records.map((r) => (
                 <TableRow key={r.id}>
                   <TableCell>{r.role}</TableCell>
-                  <TableCell><Badge variant="outline">{r.level_standardized}</Badge></TableCell>
+                  <TableCell>
+                    <Badge variant="outline">{r.level_standardized}</Badge>
+                  </TableCell>
                   <TableCell>{r.location ?? "—"}</TableCell>
                   <TableCell>{Number(r.experience_years)}y</TableCell>
-                  <TableCell className="text-right tabular-nums">{formatINR(Number(r.base_salary))}</TableCell>
-                  <TableCell className="text-right tabular-nums">{formatINR(Number(r.bonus))}</TableCell>
-                  <TableCell className="text-right tabular-nums">{formatINR(Number(r.stock))}</TableCell>
-                  <TableCell className="text-right tabular-nums font-medium">{formatINR(Number(r.total_compensation))}</TableCell>
+                  <TableCell className="text-right tabular-nums">
+                    {formatINR(Number(r.base_salary))}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums">
+                    {formatINR(Number(r.bonus))}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums">
+                    {formatINR(Number(r.stock))}
+                  </TableCell>
+                  <TableCell className="text-right tabular-nums font-medium">
+                    {formatINR(Number(r.total_compensation))}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>

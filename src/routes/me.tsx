@@ -203,21 +203,19 @@ function MePage() {
         <Stat
           label="Lifetime growth"
           value={growthAbs ? `${growthPct >= 0 ? "+" : ""}${growthPct.toFixed(0)}%` : "—"}
-          sub={
-            cagr
-              ? `${cagr.toFixed(1)}% CAGR over ${yearsSpan.toFixed(1)}y`
-              : "Need 2+ entries"
-          }
+          sub={cagr ? `${cagr.toFixed(1)}% CAGR over ${yearsSpan.toFixed(1)}y` : "Need 2+ entries"}
           tone={growthPct >= 0 ? "success" : "destructive"}
-          icon={growthPct >= 0 ? <TrendingUp className="h-4 w-4" /> : <TrendingDown className="h-4 w-4" />}
+          icon={
+            growthPct >= 0 ? (
+              <TrendingUp className="h-4 w-4" />
+            ) : (
+              <TrendingDown className="h-4 w-4" />
+            )
+          }
         />
         <Stat
           label="vs market median"
-          value={
-            vsMarket == null
-              ? "—"
-              : `${vsMarket >= 0 ? "+" : ""}${vsMarket.toFixed(0)}%`
-          }
+          value={vsMarket == null ? "—" : `${vsMarket >= 0 ? "+" : ""}${vsMarket.toFixed(0)}%`}
           sub={
             latestBench
               ? latestBench.sample_size > 0
@@ -227,7 +225,9 @@ function MePage() {
           }
           tone={vsMarket == null ? undefined : vsMarket >= 0 ? "success" : "warning"}
           icon={
-            vsMarket == null ? <Minus className="h-4 w-4" /> : vsMarket >= 0 ? (
+            vsMarket == null ? (
+              <Minus className="h-4 w-4" />
+            ) : vsMarket >= 0 ? (
               <TrendingUp className="h-4 w-4" />
             ) : (
               <TrendingDown className="h-4 w-4" />
@@ -285,9 +285,7 @@ function MePage() {
                     border: "1px solid hsl(var(--border))",
                     fontSize: 12,
                   }}
-                  formatter={(value) =>
-                    value == null ? "—" : formatINR(Number(value))
-                  }
+                  formatter={(value) => (value == null ? "—" : formatINR(Number(value)))}
                 />
                 <Legend wrapperStyle={{ fontSize: 12 }} />
                 <Line
@@ -546,10 +544,25 @@ function EntryForm({
           }}
           className="grid gap-4 sm:grid-cols-2"
         >
-          <Field label="Company *" v={f.company_name} on={(v) => set("company_name", v)} placeholder="Google" />
-          <Field label="Role *" v={f.role} on={(v) => set("role", v)} placeholder="Software Engineer" />
+          <Field
+            label="Company *"
+            v={f.company_name}
+            on={(v) => set("company_name", v)}
+            placeholder="Google"
+          />
+          <Field
+            label="Role *"
+            v={f.role}
+            on={(v) => set("role", v)}
+            placeholder="Software Engineer"
+          />
           <Field label="Level" v={f.level} on={(v) => set("level", v)} placeholder="SDE-II / L5" />
-          <Field label="Location" v={f.location} on={(v) => set("location", v)} placeholder="Bangalore" />
+          <Field
+            label="Location"
+            v={f.location}
+            on={(v) => set("location", v)}
+            placeholder="Bangalore"
+          />
           <Field
             label="Experience (years)"
             v={f.experience_years}
@@ -557,11 +570,31 @@ function EntryForm({
             placeholder="3.5"
             type="number"
           />
-          <Field label="Start date *" v={f.start_date} on={(v) => set("start_date", v)} type="date" />
+          <Field
+            label="Start date *"
+            v={f.start_date}
+            on={(v) => set("start_date", v)}
+            type="date"
+          />
           <Field label="End date" v={f.end_date} on={(v) => set("end_date", v)} type="date" />
-          <Field label="Base salary *" v={f.base_salary} on={(v) => set("base_salary", v)} placeholder="25 LPA or 2500000" />
-          <Field label="Bonus (annual)" v={f.bonus} on={(v) => set("bonus", v)} placeholder="3 LPA" />
-          <Field label="Stock (annual)" v={f.stock} on={(v) => set("stock", v)} placeholder="10 LPA" />
+          <Field
+            label="Base salary *"
+            v={f.base_salary}
+            on={(v) => set("base_salary", v)}
+            placeholder="25 LPA or 2500000"
+          />
+          <Field
+            label="Bonus (annual)"
+            v={f.bonus}
+            on={(v) => set("bonus", v)}
+            placeholder="3 LPA"
+          />
+          <Field
+            label="Stock (annual)"
+            v={f.stock}
+            on={(v) => set("stock", v)}
+            placeholder="10 LPA"
+          />
           <div className="sm:col-span-2 grid gap-1.5">
             <Label>Notes</Label>
             <Textarea

@@ -1,6 +1,7 @@
 /** Company name cleanup + slug generation. */
 
-const SUFFIX_RE = /\b(pvt|private|ltd|limited|inc|incorporated|llp|llc|technologies|tech|services|india)\b\.?/gi;
+const SUFFIX_RE =
+  /\b(pvt|private|ltd|limited|inc|incorporated|llp|llc|technologies|tech|services|india)\b\.?/gi;
 
 export function normalizeCompanyName(input: string): string {
   return input
@@ -47,11 +48,7 @@ export function levenshtein(a: string, b: string): number {
 }
 
 /** Find an existing normalized name within edit-distance threshold. */
-export function fuzzyMatch(
-  candidate: string,
-  existing: string[],
-  maxDistance = 2,
-): string | null {
+export function fuzzyMatch(candidate: string, existing: string[], maxDistance = 2): string | null {
   let best: string | null = null;
   let bestDist = Infinity;
   for (const e of existing) {

@@ -12,7 +12,10 @@ export const Route = createFileRoute("/submit")({
   head: () => ({
     meta: [
       { title: "Submit your salary — TalentDash" },
-      { name: "description", content: "Contribute an anonymous salary record to help others compare offers." },
+      {
+        name: "description",
+        content: "Contribute an anonymous salary record to help others compare offers.",
+      },
     ],
   }),
   component: SubmitPage,
@@ -54,7 +57,16 @@ function SubmitPage() {
       if (res.accepted > 0) {
         toast.success("Thanks — your submission is live.");
         router.invalidate();
-        setForm({ company: "", role: "", level: "", location: "", experience_years: "", base_salary: "", bonus: "", stock: "" });
+        setForm({
+          company: "",
+          role: "",
+          level: "",
+          location: "",
+          experience_years: "",
+          base_salary: "",
+          bonus: "",
+          stock: "",
+        });
       } else if (res.duplicates > 0) {
         toast.info("Looks like a duplicate of a recent record.");
       } else {
@@ -75,13 +87,35 @@ function SubmitPage() {
         <code className="px-1 mx-1 bg-muted rounded">10-15 LPA</code> are accepted.
       </p>
       <Card>
-        <CardHeader><CardTitle>Your offer</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>Your offer</CardTitle>
+        </CardHeader>
         <CardContent>
           <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
-            <Field label="Company *" v={form.company} on={(v) => set("company", v)} placeholder="Google" />
-            <Field label="Role *" v={form.role} on={(v) => set("role", v)} placeholder="Software Engineer" />
-            <Field label="Level / title" v={form.level} on={(v) => set("level", v)} placeholder="SDE-II or L5" />
-            <Field label="Location" v={form.location} on={(v) => set("location", v)} placeholder="Bangalore" />
+            <Field
+              label="Company *"
+              v={form.company}
+              on={(v) => set("company", v)}
+              placeholder="Google"
+            />
+            <Field
+              label="Role *"
+              v={form.role}
+              on={(v) => set("role", v)}
+              placeholder="Software Engineer"
+            />
+            <Field
+              label="Level / title"
+              v={form.level}
+              on={(v) => set("level", v)}
+              placeholder="SDE-II or L5"
+            />
+            <Field
+              label="Location"
+              v={form.location}
+              on={(v) => set("location", v)}
+              placeholder="Bangalore"
+            />
             <Field
               label="Experience (years) *"
               v={form.experience_years}
@@ -89,9 +123,19 @@ function SubmitPage() {
               placeholder="3.5"
               type="number"
             />
-            <Field label="Base salary *" v={form.base_salary} on={(v) => set("base_salary", v)} placeholder="25 LPA or 2500000" />
+            <Field
+              label="Base salary *"
+              v={form.base_salary}
+              on={(v) => set("base_salary", v)}
+              placeholder="25 LPA or 2500000"
+            />
             <Field label="Bonus" v={form.bonus} on={(v) => set("bonus", v)} placeholder="3 LPA" />
-            <Field label="Stock (annual)" v={form.stock} on={(v) => set("stock", v)} placeholder="10 LPA" />
+            <Field
+              label="Stock (annual)"
+              v={form.stock}
+              on={(v) => set("stock", v)}
+              placeholder="10 LPA"
+            />
             <div className="sm:col-span-2 flex justify-end">
               <Button type="submit" disabled={loading}>
                 {loading ? "Saving…" : "Submit"}

@@ -5,10 +5,24 @@ export type SourcePlatform = (typeof SOURCE_PLATFORMS)[number];
 
 export const STANDARD_LEVELS = [
   "Intern",
-  "L1", "L2", "L3", "L4", "L5", "L6", "L7", "L8",
-  "SDE-I", "SDE-II", "SDE-III",
-  "Senior", "Staff", "Principal", "Distinguished",
-  "Manager", "Senior Manager", "Director",
+  "L1",
+  "L2",
+  "L3",
+  "L4",
+  "L5",
+  "L6",
+  "L7",
+  "L8",
+  "SDE-I",
+  "SDE-II",
+  "SDE-III",
+  "Senior",
+  "Staff",
+  "Principal",
+  "Distinguished",
+  "Manager",
+  "Senior Manager",
+  "Director",
   "Unknown",
 ] as const;
 export type StandardLevel = (typeof STANDARD_LEVELS)[number];

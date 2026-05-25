@@ -47,16 +47,29 @@ function LoginPage() {
   return (
     <main className="container mx-auto px-4 py-16 max-w-md">
       <Card>
-        <CardHeader><CardTitle>{mode === "signin" ? "Sign in" : "Create your account"}</CardTitle></CardHeader>
+        <CardHeader>
+          <CardTitle>{mode === "signin" ? "Sign in" : "Create your account"}</CardTitle>
+        </CardHeader>
         <CardContent>
           <form onSubmit={submit} className="grid gap-3">
             <div className="grid gap-1.5">
               <Label>Email</Label>
-              <Input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
             <div className="grid gap-1.5">
               <Label>Password</Label>
-              <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required minLength={6} />
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+              />
             </div>
             <Button type="submit" disabled={loading}>
               {loading ? "Working…" : mode === "signin" ? "Sign in" : "Sign up"}

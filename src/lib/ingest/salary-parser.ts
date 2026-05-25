@@ -23,7 +23,12 @@ export function parseSalary(input: string | number | null | undefined): ParsedSa
   if (input === null || input === undefined) return null;
   if (typeof input === "number") {
     if (!isFinite(input) || input <= 0) return null;
-    return { min: Math.round(input), max: Math.round(input), avg: Math.round(input), confidence: 1 };
+    return {
+      min: Math.round(input),
+      max: Math.round(input),
+      avg: Math.round(input),
+      confidence: 1,
+    };
   }
   const raw = input.trim().toLowerCase().replace(/[₹,]/g, "");
   if (!raw) return null;

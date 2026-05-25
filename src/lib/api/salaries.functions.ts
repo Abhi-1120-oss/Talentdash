@@ -34,7 +34,9 @@ export const getCompanyBySlug = createServerFn({ method: "GET" })
 
     const { data: records } = await supabaseAdmin
       .from("salary_records")
-      .select("id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, submitted_at")
+      .select(
+        "id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, submitted_at",
+      )
       .eq("company_id", company.id)
       .eq("status", "approved")
       .order("total_compensation", { ascending: false })
@@ -48,7 +50,9 @@ export const getRole = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     const { data: records } = await supabaseAdmin
       .from("salary_records")
-      .select("id, company_id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, companies(name, slug)")
+      .select(
+        "id, company_id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, companies(name, slug)",
+      )
       .ilike("role", `%${data.role}%`)
       .eq("status", "approved")
       .order("total_compensation", { ascending: false })
@@ -61,7 +65,9 @@ export const searchSalaries = createServerFn({ method: "GET" })
   .handler(async ({ data }) => {
     let query = supabaseAdmin
       .from("salary_records")
-      .select("id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, submitted_at, companies(name, slug)")
+      .select(
+        "id, role, level_standardized, location, experience_years, base_salary, bonus, stock, total_compensation, confidence_score, submitted_at, companies(name, slug)",
+      )
       .eq("status", "approved")
       .order("submitted_at", { ascending: false })
       .limit(100);
